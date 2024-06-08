@@ -20,15 +20,23 @@ function search(){
     })
     .then(result =>{
         ricerca= document.getElementById('ricerca').value= ""   
-        let image = document.getElementById('image') 
-        if (tipologia === 'Photo')
+        let image = document.getElementById('image')
+    switch(tipologia) {
+        case 'Photo':
             for (i of result.photos)  {  
-            image.innerHTML += "<div class='col-6 col-md-3 gy-3'><img class='img-fluid' src="+ i.src.medium + "></div>"
-        }
-        else {
-            for (i of result.videos)
-            image.innerHTML += "<video class='col-6 col-md-3 gy-3' src=" + i.video_files[0].link + " controls>" 
-        }
+                
+                image.innerHTML += "<div class='col-6 col-md-3 gy-3'><img class='img-fluid' src="+ i.src.medium + "></div>"
+            }
+            break
+        case 'Video':
+            for (i of result.videos) {
+                console.log(i)
+                 image.innerHTML += "<video class='col-6 col-md-3 gy-3' src=" + i.video_files[0].link + " controls>" 
+            }
+            break
+        default: 
+         alert('What are you looking for?')
+        }           
     });
         image.innerHTML=""
 }
